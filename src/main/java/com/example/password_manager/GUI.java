@@ -33,6 +33,7 @@ public class GUI implements Initializable {
 
     @FXML
     private void on_button_add(){
+
         if (is_valid_input(usageField.getText(),passwordField.getText(),repeatPasswordField.getText())) {
 
             database.insertPassword(usageField.getText(), passwordField.getText());
@@ -87,9 +88,18 @@ public class GUI implements Initializable {
         database.printAllPasswords();
     }//end of on_remove_current_button
 
+    @FXML
+    private void onButtonRandPw(){
+        Password_Generator.createPassword();
+        String password = Password_Generator.getPassword();
+        passwordField.setText(password);
+        repeatPasswordField.setText(password);
+    }//end of onButtonRandPw
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         //connect to sqlite database and setup a table
         database.connect();
         database.createTable();
